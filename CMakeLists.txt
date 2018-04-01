@@ -1,20 +1,30 @@
 cmake_minimum_required(VERSION 3.1)
 set (CMAKE_CXX_STANDARD 11)
 
-set(PROJ_MAIN BasicProject)
+set(PROJ_MAIN istreamreader)
 
 project(${PROJ_MAIN}
     LANGUAGES CXX)
 
+include_directories(include)
+
+set(HEADERS
+    include/IReadStream.hpp
+    include/FileReadStream.hpp
+    include/Exceptions.hpp
+)
+
 set(SOURCE
     main.cpp
-    )
+    src/IReadStream.cpp
+    src/FileReadStream.cpp
+)
 
 
-add_executable(${PROJ_MAIN} ${SOURCE})
+add_executable(${PROJ_MAIN} ${SOURCE} ${HEADERS})
 
 #tests target
-set(PROJ_TESTS BasicTests)
+set(PROJ_TESTS StreamReaderTests)
 
 add_definitions(-DGTEST_LANGUAGE_CXX11)
 
@@ -40,9 +50,13 @@ include_directories(${GTestSrc}
     ${GMockSrc}
     ${GMockSrc}/include)
 
+set(TEST_CLASSES
+    src/FileReadStream.cpp)
+
 set(SOURCE_TESTS
     tests/main.cpp
-    tests/tst_basicunittest.h
+    ${TEST_CLASSES}
+    tests/tst_streamreadertest.h
 )
 
 add_executable(${PROJ_TESTS}

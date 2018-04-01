@@ -1,4 +1,4 @@
-#include "tst_basicunittest.h"
+#include "tst_streamreadertest.h"
 
 #include <gtest/gtest.h>
 
